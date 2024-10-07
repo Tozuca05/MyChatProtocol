@@ -10,15 +10,14 @@ type M interface {
 }
 
 type Message struct {
-	Method string
-	Sender string
-	Content string
+	Method   string
+	Sender   string
+	Content  string
 	Receptor string
 }
 
-
 func (m *Message) SendById(conn net.Conn) bool {
-	_, err := conn.Write([]byte("Mensaje: " + m.Content))
+	_, err := conn.Write([]byte(fmt.Sprintf("Mensaje de %s: %s", m.Sender, m.Content)))
 	if err != nil {
 		fmt.Println("Error al escribir:", err)
 		return false
